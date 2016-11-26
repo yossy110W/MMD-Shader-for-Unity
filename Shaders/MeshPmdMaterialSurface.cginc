@@ -44,7 +44,7 @@ inline half4 LightingMMD (EditorSurfaceOutput s, half3 lightDir, half3 viewDir, 
 	// Specular
 	float specularStrength = s.Specular;
 	float dirDotNormalHalf = max(0, dot(s.Normal, normalize(lightDir + viewDir)));
-	float dirSpecularWeight = pow( dirDotNormalHalf, _Shininess );
+	float dirSpecularWeight = dirDotNormalHalf == 0 ? 0.0f : pow( dirDotNormalHalf, _Shininess );
 	float4 dirSpecular = _SpecularColor * lightColor * dirSpecularWeight;
 	// ToonMap
 	float lightStrength = dot(lightDir, s.Normal) * 0.5 + 0.5;
