@@ -15,12 +15,11 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-Shader "MMD/Transparent/PMDMaterial"
+Shader "MMD/PMDMaterialDouble"
 {
 	Properties
 	{
 		_Color("拡散色", Color) = (1,1,1,1)
-		_Opacity("不透明度", Float) = 1.0
 		_SpecularColor("反射色", Color) = (1,1,1)
 		_AmbColor("環境色", Color) = (1,1,1)
 		_Shininess("反射強度", Float) = 0
@@ -32,22 +31,20 @@ Shader "MMD/Transparent/PMDMaterial"
 
 	SubShader
 	{
-		// Settings
-		Tags
-		{
-			"Queue" = "Transparent"
-			"RenderType" = "Transparent"
-		}
-		
+		// First Pass
+//		Pass
+//		{
+//			Cull Back
+//		}
+		Cull Off
+
 		// Surface Shader
-		Cull Back
-		Blend SrcAlpha OneMinusSrcAlpha
 		CGPROGRAM
-		#pragma surface surf MMD alpha
+		#pragma surface surf MMD
 		#include "MeshPmdMaterialSurface.cginc"
 		ENDCG
 	}
 
 	// Other Environment
-	Fallback "Transparent/Diffuse"
+	Fallback "Diffuse"
 }
